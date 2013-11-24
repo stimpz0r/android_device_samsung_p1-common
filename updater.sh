@@ -39,7 +39,7 @@ fix_package_location() {
 }
 
 # ui_print by Chainfire
-OUTFD=$(/tmp/busybox ps | /tmp/busybox grep -v "grep" | /tmp/busybox grep -o -E "update_binary(.*)" | /tmp/busybox cut -d " " -f 3);
+OUTFD=$(busybox ps | busybox grep -v "grep" | busybox grep -o -E "update_binary(.*)" | busybox cut -d " " -f 3);
 ui_print() {
   if [ $OUTFD != "" ]; then
     echo "ui_print ${1} " 1>&$OUTFD;
@@ -63,8 +63,8 @@ else
     IS_GSM='/tmp/busybox true'
     SD_PART='/dev/block/mmcblk0p1'
     MTD_SIZE='454557696'
-    EFS_PART=`/tmp/busybox grep efs /proc/mtd | /tmp/busybox awk '{print $1}' | /tmp/busybox sed 's/://g' | /tmp/busybox sed 's/mtd/mtdblock/g'`
-    RADIO_PART=`/tmp/busybox grep radio /proc/mtd | /tmp/busybox awk '{print $1}' | /tmp/busybox sed 's/://g' | /tmp/busybox sed 's/mtd/mtdblock/g'`
+    EFS_PART=`busybox grep efs /proc/mtd | busybox awk '{print $1}' | busybox sed 's/://g' | busybox sed 's/mtd/mtdblock/g'`
+    RADIO_PART=`busybox grep radio /proc/mtd | busybox awk '{print $1}' | busybox sed 's/://g' | busybox sed 's/mtd/mtdblock/g'`
 fi
 
 # Check if this is a CDMA device with no eMMC
@@ -75,7 +75,7 @@ fi
 # check for old/non-cwm recovery.
 if ! /tmp/busybox test -n "$UPDATE_PACKAGE" ; then
     # scrape package location from /tmp/recovery.log
-    UPDATE_PACKAGE=`/tmp/busybox cat /tmp/recovery.log | /tmp/busybox grep 'Update location:' | /tmp/busybox tail -n 1 | /tmp/busybox cut -d ' ' -f 3-`
+    UPDATE_PACKAGE=`busybox cat /tmp/recovery.log | busybox grep 'Update location:' | busybox tail -n 1 | busybox cut -d ' ' -f 3-`
 fi
 
 # check if we're running on a bml, mtd (old) or mtd (current) device
@@ -120,8 +120,8 @@ if /tmp/busybox test -e /dev/block/bml7 ; then
     /sbin/reboot now
     exit 0
 
-elif /tmp/busybox test `/tmp/busybox cat /sys/class/mtd/mtd2/size` != "$MTD_SIZE" || \
-    /tmp/busybox test `/tmp/busybox cat /sys/class/mtd/mtd2/name` != "system" ; then
+elif /tmp/busybox test `busybox cat /sys/class/mtd/mtd2/size` != "$MTD_SIZE" || \
+    /tmp/busybox test `busybox cat /sys/class/mtd/mtd2/name` != "system" ; then
     # we're running on a mtd (old) device
 
     # make sure sdcard is mounted

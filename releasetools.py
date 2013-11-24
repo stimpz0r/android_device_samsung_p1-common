@@ -21,7 +21,7 @@ import os
 LOCAL_DIR = os.path.dirname(os.path.abspath(__file__))
 TARGET_DIR = os.getenv('OUT')
 UTILITIES_DIR = os.path.join(TARGET_DIR, 'utilities')
-TARGET_DEVICE = os.getenv('CM_BUILD')
+TARGET_DEVICE = os.getenv('CUSTOM_BUILD')
 
 def FullOTA_Assertions(info):
   if TARGET_DEVICE == "p1":
