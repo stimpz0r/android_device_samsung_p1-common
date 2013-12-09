@@ -77,7 +77,7 @@ BOARD_USES_SKTEXTBOX := true
 BOARD_NAND_PAGE_SIZE := 4096
 BOARD_NAND_SPARE_SIZE := 128
 BOARD_KERNEL_BASE := 0x32000000
-BOARD_KERNEL_PAGESIZE := 4096
+BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 7864320
@@ -97,9 +97,9 @@ BOARD_HAS_FLIPPED_SCREEN        := true
 RECOVERY_TOUCHSCREEN_FLIP_Y     := true
 RECOVERY_TOUCHSCREEN_FLIP_X     := true
 TW_NO_REBOOT_BOOTLOADER         := true
-TW_NO_REBOOT_RECOVERY           := true
+TW_NO_REBOOT_RECOVERY           := false
 TW_NO_EXFAT                     := true
-TW_INCLUDE_INJECTTWRP           := true
+TW_INCLUDE_INJECTTWRP           := false
 TW_MAX_BRIGHTNESS               := 255
 TW_BRIGHTNESS_PATH              := /sys/devices/platform/s3cfb/cmc623_pwm_bl/backlight/s5p_bl/brightness
 TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
@@ -109,9 +109,9 @@ BOARD_USE_CUSTOM_RECOVERY_FONT  := \"roboto_10x18.h\"
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/p1-common/recovery/graphics.c
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/p1-common/recovery/keys.c
 BOARD_USES_BML_OVER_MTD := true
+#BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/p1-common/recovery/graphics.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/p1-common/recovery/keys.c
 
 # Samsung EMMC brick bug
 # Already disabled in kernel, but disable again for safety
@@ -145,6 +145,7 @@ BOARD_SEPOLICY_UNION += \
     device.te \
     domain.te \
     file_contexts \
+    healthd.te \
     mediaserver.te \
     property_contexts \
     pvrsrvinit.te \
