@@ -23,6 +23,7 @@ TARGET_SCREEN_WIDTH := 600
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES := \
+	device/samsung/p1-common/libaudio/audio_effects.conf:system/vendor/etc/audio_effects.conf \
 	device/samsung/p1-common/libaudio/audio_policy.conf:system/etc/audio_policy.conf \
 	device/samsung/p1-common/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
